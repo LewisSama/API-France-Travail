@@ -21,6 +21,8 @@ WORKDIR /var/www/html
 # Étape 5 : Copie des fichiers du projet
 COPY . /var/www/html
 
+RUN composer install
+
 RUN mkdir -p /var/www/html/var
 
 # Étape 6 : Changement des permissions
