@@ -10,7 +10,7 @@ RUN apt-get update && apt-get install -y \
     curl \
     && docker-php-ext-install pdo pdo_mysql zip opcache
 
-#prévoir clear cache
+#TODO: prévoir clear cache
 
 # Étape 3 : Installation de Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
@@ -30,6 +30,8 @@ RUN chown -R www-data:www-data /var/www/html \
     && chmod -R 775 /var/www/html/var
 
 COPY ./docker/php-fpm/php-fpm.conf /usr/local/etc/php-fpm.d/www.conf
+
+RUN php bin/console doctrine:migration:migrate
 
 # Étape 8 : Commande par défaut (PHP-FPM en mode daemon)
 CMD ["php-fpm"]
