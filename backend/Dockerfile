@@ -31,8 +31,6 @@ RUN chown -R www-data:www-data /var/www/html \
 
 COPY ./docker/php-fpm/php-fpm.conf /usr/local/etc/php-fpm.d/www.conf
 
-RUN php bin/console doctrine:migration:migrate
-
 # Étape 8 : Commande par défaut (PHP-FPM en mode daemon)
 CMD ["php-fpm"]
 
